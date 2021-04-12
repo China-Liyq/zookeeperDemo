@@ -1,7 +1,6 @@
 package org.example;
 
 import org.apache.zookeeper.*;
-import org.apache.zookeeper.data.Stat;
 import org.example.config.MyConfig;
 import org.example.config.MyWatch;
 import org.example.config.ZKUtils;
@@ -31,6 +30,7 @@ public class ConfigTest {
         myWatch.setMyConfig(myConfig);
         myWatch.setZk(zk);
         myWatch.setNodepath(codePath);
+        //创建初始数据
         try {
             String s = zk.create(codePath, dataValue.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
             System.out.println(s);
@@ -38,10 +38,14 @@ public class ConfigTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         myWatch.aWait();
 
         while (true){
+            //值删除了进入阻塞
+            if(myConfig.getConf().equals("")){
+                System.out.println("数据失效了...");
+                myWatch.aWait();
+            }
             System.out.println(myConfig.getConf());
             try {
                 Thread.sleep(2000);

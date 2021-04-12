@@ -2,7 +2,7 @@ package org.example.config;
 
 /**
  * @Author: liyq
- * @Description: zookeeper
+ * @Description: 配置数加接收
  * @Date: 2021/4/12 - 14:10
  * @Version: 1.0
  **/

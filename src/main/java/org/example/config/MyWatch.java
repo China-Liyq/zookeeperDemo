@@ -38,6 +38,7 @@ public class MyWatch implements Watcher, AsyncCallback.StatCallback,AsyncCallbac
                 zk.getData(nodepath,this,this,"ccc");
                 break;
             case NodeDeleted:
+                //清空配置数据和阻塞状态并监听
                 myConfig.setConf("");
                 cd = new CountDownLatch(1);
                 break;
