@@ -18,7 +18,6 @@ public class ConfigTest {
     ZooKeeper zk;
     String codePath = "/a";
     String dataValue = "123456";
-
     @Before
     public void init(){
         zk = ZKUtils.getZookeeper();

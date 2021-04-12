@@ -14,19 +14,6 @@ import java.util.concurrent.CountDownLatch;
 public class DefaultWatch implements Watcher {
     //阻塞对象
     private CountDownLatch cd;
-
-    public DefaultWatch(CountDownLatch cd) {
-        this.cd = cd;
-    }
-
-    public CountDownLatch getCd() {
-        return cd;
-    }
-
-    public void setCd(CountDownLatch cd) {
-        this.cd = cd;
-    }
-
     @Override
     public void process(WatchedEvent watchedEvent) {
         System.out.println(watchedEvent);
@@ -53,5 +40,14 @@ public class DefaultWatch implements Watcher {
             case Expired:
                 break;
         }
+    }
+    public DefaultWatch(CountDownLatch cd) {
+        this.cd = cd;
+    }
+    public CountDownLatch getCd() {
+        return cd;
+    }
+    public void setCd(CountDownLatch cd) {
+        this.cd = cd;
     }
 }

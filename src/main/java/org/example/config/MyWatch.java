@@ -19,7 +19,6 @@ public class MyWatch implements Watcher, AsyncCallback.StatCallback,AsyncCallbac
     private MyConfig myConfig;
     private CountDownLatch cd = new CountDownLatch(1);
     private String nodepath;
-
     public void aWait(){
         zk.exists(nodepath, this,this,"zaaa");
         try {
@@ -28,7 +27,7 @@ public class MyWatch implements Watcher, AsyncCallback.StatCallback,AsyncCallbac
             e.printStackTrace();
         }
     }
-
+    //事件监听
     @Override
     public void process(WatchedEvent watchedEvent) {
         switch (watchedEvent.getType()) {
@@ -49,22 +48,20 @@ public class MyWatch implements Watcher, AsyncCallback.StatCallback,AsyncCallbac
                 break;
         }
     }
-
+    //判断是否存在
     @Override
     public void processResult(int i, String s, Object o, Stat stat) {
         if (stat != null){
             zk.getData(nodepath,this,this,"aaa");
         }
-
     }
-
+    //调用值
     @Override
     public void processResult(int i, String s, Object o, byte[] bytes, Stat stat) {
         if (null != bytes){
             myConfig.setConf(new String(bytes));
             cd.countDown();
         }
-
     }
 
     public String getNodepath() {
